@@ -4,22 +4,34 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+/**
+ * Die Klasse {@code DateiAusgabe} dient dem ausgeben der Antwort in Form einer Datei.
+ * Der Name der Ausgabedatei setzt sich zusammen aus dem Namen der Eingabedatei
+ * und einer Dateiendung, welche bestimmt ist durch die schreibende Methode {@link DateiAusgabe#schreibeAusgabe(String)}
+ * bzw. {@link DateiAusgabe#schreibeFehler(String, String, int)}
+ * 
+ * Die Ausgabedatei wird immer in das {@value #DATEIPFAD} Verzeichnis geschrieben.
+ * 
+ * @author Lukas Dahlberg
+ * @version 1.0
+ */
 public class DateiAusgabe implements IAusgabe {
 
-	private final String DATEIPFAD = "./Output/";
-	private final String INOUTLINE = "********************************************************************************";
-	private final String BEGINENDLINE = "*****";
+	private static final String DATEIPFAD = "./Output/";
+	private static final String INOUTLINE = "********************************************************************************";
+	private static final String BEGINENDLINE = "*****";
 	
-	public DateiAusgabe() {
-		
-	}
-	
+	/**
+	 * @see IAusgabe#schreibeFehler(String, String, int)
+	 * 
+	 * @throws RuntimeException Wenn die Ausgabedatei nicht geschrieben werden kann.
+	 */
 	@Override
 	public void schreibeFehler(String fehlermeldung, String dateiname, int zeile) {
 		if(fehlermeldung == null || fehlermeldung.trim().length() == 0) {
 			throw new IllegalArgumentException("Keine Fehlermeldung vorhanden!");
 		} else if(dateiname == null || dateiname.trim().length() == 0) {
-			throw new IllegalArgumentException("Dateiname fÃ¼r Fehlerdatei nicht vorhanden");
+			throw new IllegalArgumentException("Dateiname für Fehlerdatei nicht vorhanden");
 		}
 		
 		try(PrintWriter printer = new PrintWriter(new File(DATEIPFAD + dateiname + ".err"))){
@@ -50,10 +62,15 @@ public class DateiAusgabe implements IAusgabe {
 		
 	}
 	
+	/**
+	 * @see IAusgabe#schreibeAusgabe(String)
+	 * 
+	 * @throws RuntimeException Wenn die Ausgabedatei nicht geschrieben werden kann.
+	 */
 	@Override
 	public void schreibeAusgabe(String dateiname) {
 		if(dateiname == null || dateiname.trim().length() == 0) {
-			throw new IllegalArgumentException("Dateiname fÃ¼r Ausgabedatei nicht vorhanden");
+			throw new IllegalArgumentException("Dateiname für Ausgabedatei nicht vorhanden");
 		}
 		//TODO implement Ausgabe
 		try(PrintWriter printer = new PrintWriter(new File(DATEIPFAD + dateiname + ".out"))){

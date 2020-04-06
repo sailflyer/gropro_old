@@ -1,5 +1,12 @@
 package io;
 
+/**
+ * Die Klasse {@code DateiEingabe} dient dem Einlesen der Eingabedatei.
+ * Hier wird auf syntaktische Fehler geprüft, welche gemäß Konzept behandelt werden.
+ * 
+ * @author Lukas Dahlberg
+ * @version 1.0
+ */
 public class DateiEingabe implements IEingabe {
 	
 	private String kommentar;
