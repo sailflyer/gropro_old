@@ -1,4 +1,4 @@
-﻿$outdir="./Output"
+$outdir="./Output"
 $filetyp=".out"
 
 #Ueberprueft ob Ordner mit Ausgaben vorhanden ist

@@ -1,4 +1,4 @@
-﻿#Skript zum compilieren
+#Skript zum compilieren
 
 #Standardwerte
 $prog="GroPro.jar"
