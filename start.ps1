@@ -1,4 +1,4 @@
-﻿#Skript zum ausfuehren aller Testfaelle
+#Skript zum ausfuehren aller Testfaelle
 
 #Standardwerte setzen
 $prog = "GroPro.jar"
