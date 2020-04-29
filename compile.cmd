@@ -5,8 +5,8 @@
 CALL ./setEnvs.cmd
 
 :: Standardwerte in lokalen Variablen setzen
-set prog   = "GroPro.jar"
-set srcdir = "./src"
+set prog="GroPro.jar"
+set srcdir="./src"
 
 :: Ueberpruefen ob Ordner vorhanden ist und Dateien kompilieren
 if not exist %srcdir% (
@@ -20,7 +20,7 @@ echo "Programm kompiliert"
 GOTO SUCCESSFULL
 
 :ERRORSECTION
-    echo "-------------Test-Fehler-------------"
+    echo "-------------FEHLER-------------"
     echo "Pfad fuer Sourcecode-Dateien wurde nicht gefunden!"
     echo "Bitte ueberpruefen Sie ob der Pfad"
     echo %srcdir%

@@ -49,7 +49,7 @@ if(Test-Path "./$prog")
             }
             else
             {
-                echo "-------------Test-Fehler-------------"
+                echo "-------------WARNUNG-------------"
                 echo "Ordner fuer Testfeaelle ist leer!"
                 echo "Bitte ueberpruefen Sie ob der Ordner"
                 echo "$dir"
@@ -61,7 +61,7 @@ if(Test-Path "./$prog")
     }
     else
     {
-        echo "-------------Test-Fehler-------------"
+        echo "-------------FEHLER-------------"
         echo "Pfad fuer Testfeaelle nicht gefunden!"
         echo "Bitte ueberpruefen Sie ob der Pfad"
         echo "$dir"

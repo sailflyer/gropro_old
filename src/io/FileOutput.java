@@ -7,37 +7,51 @@ import java.io.PrintWriter;
 /**
  * Die Klasse {@code DateiAusgabe} dient dem ausgeben der Antwort in Form einer Datei.
  * Der Name der Ausgabedatei setzt sich zusammen aus dem Namen der Eingabedatei
- * und einer Dateiendung, welche bestimmt ist durch die schreibende Methode {@link DateiAusgabe#schreibeAusgabe(String)}
- * bzw. {@link DateiAusgabe#schreibeFehler(String, String, int)}
+ * und einer Dateiendung, welche bestimmt ist durch die schreibende Methode {@link FileOutput#writeOutput(String)}
+ * bzw. {@link FileOutput#writeError(String, String, int)}
  * 
- * Die Ausgabedatei wird immer in das {@value #DATEIPFAD} Verzeichnis geschrieben.
+ * Die Ausgabedatei wird immer in das {@value #PATH} Verzeichnis geschrieben.
  * 
  * @author Lukas Dahlberg
  * @version 1.0
  */
-public class DateiAusgabe implements IAusgabe {
+public class FileOutput implements IOutput {
 
-	private static final String DATEIPFAD = "./Output/";
+	private static final String PATH = "./Output/";
 	private static final String INOUTLINE = "********************************************************************************";
 	private static final String BEGINENDLINE = "*****";
+	private String filename;
+	
+	public FileOutput(String filename) {
+		setFilename(filename);
+	}
+	
+	public void setFilename(String filename) {
+		if(filename == null || filename.trim().length() == 0) {
+			throw new IllegalArgumentException("Kein Dateiname übergeben worden.");
+		}
+		this.filename = filename;
+	}
+	
+	public String getFilename() {
+		return filename;
+	}
 	
 	/**
-	 * @see IAusgabe#schreibeFehler(String, String, int)
+	 * @see IOutput#writeError(String, String, int)
 	 * 
 	 * @throws RuntimeException Wenn die Ausgabedatei nicht geschrieben werden kann.
 	 */
 	@Override
-	public void schreibeFehler(String fehlermeldung, String dateiname, int zeile) {
-		if(fehlermeldung == null || fehlermeldung.trim().length() == 0) {
+	public void writeError(String errorMessage, int row) {
+		if(errorMessage == null || errorMessage.trim().length() == 0) {
 			throw new IllegalArgumentException("Keine Fehlermeldung vorhanden!");
-		} else if(dateiname == null || dateiname.trim().length() == 0) {
-			throw new IllegalArgumentException("Dateiname für Fehlerdatei nicht vorhanden");
 		}
 		
-		try(PrintWriter printer = new PrintWriter(new File(DATEIPFAD + dateiname + ".err"))){
+		try(PrintWriter printer = new PrintWriter(new File(PATH + filename + ".err"))){
 			String leerzeichenDatei = "";
 			
-			for(int i = 0; i < (dateiname.length() + 11) / 2; ++i) {
+			for(int i = 0; i < (filename.length() + 11) / 2; ++i) {
 				leerzeichenDatei += " ";
 			}
 			
@@ -46,13 +60,13 @@ public class DateiAusgabe implements IAusgabe {
 					+ INOUTLINE);
 			printer.println(BEGINENDLINE 
 					+ "                              Zeile: " 
-					+ String.format("%03d", zeile) 
+					+ String.format("%03d", row) 
 					+ "                              " 
 					+ BEGINENDLINE);
 			printer.println(BEGINENDLINE
-					+ leerzeichenDatei + "Dateiname: " + dateiname + leerzeichenDatei
+					+ leerzeichenDatei + "Dateiname: " + filename + leerzeichenDatei
 					+ BEGINENDLINE);
-			printer.println(fehlermeldung);
+			printer.println(errorMessage);
 			printer.println(INOUTLINE + "\n" + INOUTLINE + "\n" + INOUTLINE);
 			
 			printer.flush();
@@ -63,17 +77,14 @@ public class DateiAusgabe implements IAusgabe {
 	}
 	
 	/**
-	 * @see IAusgabe#schreibeAusgabe(String)
+	 * @see IOutput#writeOutput(String)
 	 * 
 	 * @throws RuntimeException Wenn die Ausgabedatei nicht geschrieben werden kann.
 	 */
 	@Override
-	public void schreibeAusgabe(String dateiname) {
-		if(dateiname == null || dateiname.trim().length() == 0) {
-			throw new IllegalArgumentException("Dateiname für Ausgabedatei nicht vorhanden");
-		}
+	public void writeOutput() {
 		//TODO implement Ausgabe
-		try(PrintWriter printer = new PrintWriter(new File(DATEIPFAD + dateiname + ".out"))){
+		try(PrintWriter printer = new PrintWriter(new File(PATH + filename + ".out"))){
 			printer.flush();
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException("Fehler beim schreiben der Ausgabedatei");

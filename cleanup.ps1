@@ -15,7 +15,7 @@ $filetyp=".out"
             }
             else
             {
-                echo "-------------Test-Fehler-------------"
+                echo "-------------WARNUNG-------------"
                 echo "Ordner fuer die Ausgabedateien ist leer!"
                 echo "Bitte ueberpruefen Sie ob der Ordner"
                 echo "$outdir"
@@ -27,7 +27,7 @@ $filetyp=".out"
     }
     else
     {
-        echo "-------------Test-Fehler-------------"
+        echo "-------------FEHLER-------------"
         echo "Pfad fuer die Ausgabedateien wurde nicht gefunden!"
         echo "Bitte ueberpruefen Sie ob der Pfad"
         echo "$outdir"
