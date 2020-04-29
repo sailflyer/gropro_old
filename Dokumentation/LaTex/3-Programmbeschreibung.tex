@@ -2,11 +2,11 @@
 \label{chap:Programmbeschreibung}
 \section{Pakete}
 Das Programms ist in drei Module unterteilt, welche nach dem MVC-Model entwickelt wurden. Für jedes dieser Module wurde zunächst ein Interface deklariert, damit das Programm leicht wart- und erweiterbar bleibt. Die Namen der Interfaces beginnen mit einem \glqq I\grqq, wie es etwaige Namenskonventionen vorgeben.
-%\begin{figure}[!h]
-%	\centering
-%	\includegraphics[width=1\textwidth]{./Graphics/Paketdiagramm}
-%	\caption{Übersicht zu den Paketen}
-%\end{figure}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{./../Diagramme/PackageDiagram.png}
+	\caption{Übersicht zu den Paketen}
+\end{figure}
 \clearpage
 \subsection{Model}
 %\begin{figure}[!h]
@@ -20,14 +20,17 @@ Das Programms ist in drei Module unterteilt, welche nach dem MVC-Model entwickel
 \end{description}
 
 \subsection{IO}
-%\begin{figure}[!h]
-%	\centering
-%	\includegraphics[width=0.7\textwidth]{./Graphics/ViewClasses}
-%	\caption{Klassendiagramme aus dem Paket IO}
-%\end{figure}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{./../Diagramme/IO-Classdiagram.png}
+	\caption{Klassendiagramme aus dem Paket IO}
+\end{figure}
 \begin{description}
-	\item [IDateiBehandlung] Schnittstelle zur Ein- \& Ausgabe der Daten.
-	\item [DateiBehandlung] Implementierung von \lstinline{IDateiBehandlung}. Die Klasse verfügt über eine Methode zum lesen der Eingabedatei, eine zum schreiben der Ausgabedatei und eine zum schreiben eines Fehlers in eine Ausgabedatei.
+	\item [IInput] Schnittstelle zur Eingabe der Daten.
+	\item [FileInput] Implementierung von \lstinline{IInput}. Die Klasse verfügt über eine Methode zum einlesen der Dateien, und eine weitere zur syntaktischen Überprüfung dieser.
+	\item [IOutput] Schnittstelle zur Ausgabe der Daten.
+	\item [FileOutput] Implementierung von \lstinline{IOutput}. Die Klasse verfügt über zwei Methoden, eine zum schreiben einer einfachen Ausgabedatei, und eine zweite zum schreiben einer Fehlerdatei.
+	\item [InvalidSyntaxException] Exception Klasse zum signalisieren, dass ein syntaktischer Fehler in der Eingabedatei vorliegt. Wird in der Klasse \lstinline{FileInput} verwendet.
 \end{description}
 
 \subsection{Controller}
